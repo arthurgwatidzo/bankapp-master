@@ -1,0 +1,13 @@
+version: "3"
+services:
+  db:
+    image: "h2"
+    container_name: "disc_h2"
+    environment:
+     - POSTGRES_PASSWORD=
+    ports:
+      - "5532:5432"
+    volumes:
+      - disc_sql:/var/lib/h2/data
+volumes:
+  disc_sql:

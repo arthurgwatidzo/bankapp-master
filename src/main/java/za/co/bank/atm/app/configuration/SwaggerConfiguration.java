@@ -1,0 +1,40 @@
+package za.co.bank.atm.app.configuration;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import springfox.documentation.builders.*;
+import springfox.documentation.service.*;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+/**
+ * @author Arthur Gwatidzo email:arthur.gwatidzo@gmail.com
+ */
+@Configuration
+@EnableSwagger2
+public class SwaggerConfiguration {
+
+    @Bean
+    public Docket documentation() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("za.co.bank.atm.app.application.controller"))
+                .paths(PathSelectors.any())
+                .build()
+                .useDefaultResponseMessages(false)
+                .apiInfo(metaData());
+    }
+
+    private ApiInfo metaData() {
+        return new ApiInfoBuilder()
+                .title("Bank Balance and ATM Dispensing System")
+                .description("REST APIs for the Bank Balance and ATM Dispensing System")
+                .version("0.1")
+                .contact(new Contact(
+                        "Development Team",
+                        "apiHost",
+                        "Arthur.Gwatidzo@gmail.com"))
+                .build();
+    }
+}
