@@ -13,26 +13,17 @@
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
 	<name>bankapp</name>
-	<description>BANK BALANCE AND ATM DISPENSING SYSTEM using Java8, Spring Boot, Spring Security and H2 DB - Spring Boot Project</description>
+	<description>BANK BALANCE AND ATM DISPENSING SYSTEM using Java8, Spring Boot, Spring Security and Postgres DB - Spring Boot Project</description>
 
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
 
 	<dependencies>
-
-		<!--<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jdbc</artifactId>
-		</dependency>-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-		<!--<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-thymeleaf</artifactId>
-		</dependency>-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -47,38 +38,22 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>2.9.2</version>
 		</dependency>
-<!--
 		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<version>1.4.193</version>
-		<scope>runtime</scope>  
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
--->
         <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
 		<dependency>
     		<groupId>org.postgresql</groupId>
     		<artifactId>postgresql</artifactId>
     		<version>42.3.6</version>
 		</dependency>
-		<!--
-		<dependency>
-    		<groupId>org.flywaydb</groupId>
-    		<artifactId>postgresql</artifactId>
-		</dependency>
-        -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<version>1.18.24</version>
 			<optional>true</optional>
 		</dependency>
-		<!--<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<scope>runtime</scope>
-			<optional>true</optional>
-		</dependency>-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
