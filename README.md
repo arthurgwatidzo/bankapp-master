@@ -21,7 +21,7 @@ Ensure that you are on the root directory of the project, than execute the follo
 
 The above command will startup the db service , which in this case is Postgresql. With the following set variables
 
-Database Type: H2
+Database Type: Postgres
 
 username : sa
  
