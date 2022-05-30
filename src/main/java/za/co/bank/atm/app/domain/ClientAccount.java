@@ -21,9 +21,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class ClientAccount implements Serializable {
 
-
     @Id
-    @NonNull
     @Column(name = "client_account_number")
     private String clientAccountNumber;
 
@@ -34,19 +32,19 @@ public class ClientAccount implements Serializable {
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
-    private Client client_id;
+    private Client clientId;
 
     @JoinColumn(name = "account_type_code", referencedColumnName = "account_type_code")
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
-    private AccountType account_type_code;
+    private AccountType accountTypeCode;
 
     @JoinColumn(name = "currency_code", referencedColumnName = "currency_code")
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
-    private Currency currency_code;
+    private Currency currencyCode;
 
 
 }

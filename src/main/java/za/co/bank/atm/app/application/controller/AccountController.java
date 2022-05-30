@@ -38,7 +38,7 @@ public class AccountController {
     }
 
     @GetMapping("/{id}/withdrawFromAccount")
-    public List<AtmDenominationResponseDto> withdrawFromAcc(@PathVariable Integer id, final AccountWithdrawalRequestDto accountWithdrawalRequestDto) throws  ApplicationException {
+    public List<AtmDenominationResponseDto> withdrawFromAcc(@PathVariable Integer id, @RequestBody AccountWithdrawalRequestDto accountWithdrawalRequestDto) throws  ApplicationException {
 
         return accountService.withdrawFromAcc(id, accountWithdrawalRequestDto);
     }

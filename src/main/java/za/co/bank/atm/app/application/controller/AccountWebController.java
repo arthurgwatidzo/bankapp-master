@@ -3,6 +3,7 @@ package za.co.bank.atm.app.application.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import springfox.documentation.annotations.ApiIgnore;
 import za.co.bank.atm.app.application.service.AccountService;
 import za.co.bank.atm.app.domain.dto.AccountDto;
 import za.co.bank.atm.app.domain.dto.CurrencyAccountDto;
@@ -13,7 +14,7 @@ import java.util.List;
 /**
  * @author Arthur Gwatidzo email:arthur.gwatidzo@gmail.com
  */
-
+@ApiIgnore
 @Controller
 public class AccountWebController {
 

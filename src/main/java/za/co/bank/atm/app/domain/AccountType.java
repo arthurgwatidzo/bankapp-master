@@ -23,7 +23,7 @@ public class AccountType implements Serializable {
     @Id
     @NonNull
     @Column(name = "account_type_code")
-    private String account_type_code;
+    private String accountTypeCode;
 
     @NonNull
     @Column(name = "description")

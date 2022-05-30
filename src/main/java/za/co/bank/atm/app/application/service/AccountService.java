@@ -70,10 +70,11 @@ public class AccountService {
         List<AtmDenominationResponseDto> atmDenominationResponseDtoList;
         BigDecimal amountAfterWithdrawal;
 
+        log.debug("Fetching clientAccount with accountNumber={}", accountWithdrawalRequestDto.getAccountNumber());
         ClientAccount clientAccountDetails =  clientAccountRepository.findByClientAccountNumber(accountWithdrawalRequestDto.getAccountNumber());
         log.debug("ClientAccountDetails= {}", clientAccountDetails);
 
-        if(clientAccountDetails.getAccount_type_code().getAccount_type_code().equals(AccountTypeEnum.CHQ.toString())){
+        if(clientAccountDetails.getAccountTypeCode().getAccountTypeCode().equals(AccountTypeEnum.CHQ.toString())){
             int i = clientAccountDetails.getDisplayBalance().subtract(accountWithdrawalRequestDto.getWithdrawalAmt()).intValue();
             if(clientAccountDetails.getDisplayBalance().compareTo(new BigDecimal(-10000)) == -1||i < -10000){
                 throw new ApplicationException("Insufficient funds: You have exceeded your cheque account limit");
