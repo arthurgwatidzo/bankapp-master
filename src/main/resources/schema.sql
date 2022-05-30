@@ -4,10 +4,10 @@
  *     money at an ATM on the specified account                                        *
  ***************************************************************************************/
 
-CREATE TABLE ACCOUNT_TYPE (
+CREATE TABLE IF NOT EXISTS ACCOUNT_TYPE (
   ACCOUNT_TYPE_CODE VARCHAR(10) NOT NULL PRIMARY KEY,
   DESCRIPTION       VARCHAR(50) NOT NULL,
-  TRANSACTIONAL     BIT
+  TRANSACTIONAL     BOOLEAN
 );
 
 /*
@@ -16,7 +16,7 @@ CREATE TABLE ACCOUNT_TYPE (
  ***************************************************************************************
  */
 
-CREATE TABLE CLIENT_TYPE (
+CREATE TABLE IF NOT EXISTS CLIENT_TYPE (
   CLIENT_TYPE_CODE VARCHAR(2)   NOT NULL PRIMARY KEY,
   DESCRIPTION      VARCHAR(255) NOT NULL
 );
@@ -25,7 +25,7 @@ CREATE TABLE CLIENT_TYPE (
  *  CLIENT SUB TYPE                                                                        *
  ***************************************************************************************/
 
-CREATE TABLE CLIENT_SUB_TYPE (
+CREATE TABLE IF NOT EXISTS CLIENT_SUB_TYPE (
   CLIENT_SUB_TYPE_CODE VARCHAR(4)   NOT NULL PRIMARY KEY,
   CLIENT_TYPE_CODE     VARCHAR(2)   NOT NULL REFERENCES CLIENT_TYPE (CLIENT_TYPE_CODE),
   DESCRIPTION          VARCHAR(255) NOT NULL
@@ -35,10 +35,10 @@ CREATE TABLE CLIENT_SUB_TYPE (
  *  List of currency codes for use in the formatting test                              *
  ***************************************************************************************/
 
-CREATE TABLE CURRENCY (
+CREATE TABLE IF NOT EXISTS CURRENCY (
   CURRENCY_CODE  VARCHAR(3)   NOT NULL PRIMARY KEY,
   DECIMAL_PLACES INTEGER      NOT NULL,
-  DESCRIPTION    VARCHAR(255) NOT NULL,
+  DESCRIPTION    VARCHAR(255) NOT NULL
 );
 
 /***************************************************************************************
@@ -54,7 +54,7 @@ CREATE TABLE CURRENCY (
  *              = 105.82 ZAR                                                           *
  ***************************************************************************************/
 
-CREATE TABLE CURRENCY_CONVERSION_RATE (
+CREATE TABLE IF NOT EXISTS CURRENCY_CONVERSION_RATE (
   CURRENCY_CODE        VARCHAR(3)     NOT NULL PRIMARY KEY REFERENCES CURRENCY (CURRENCY_CODE),
   CONVERSION_INDICATOR VARCHAR(1)     NOT NULL,
   RATE                 DECIMAL(18, 8) NOT NULL
@@ -64,9 +64,9 @@ CREATE TABLE CURRENCY_CONVERSION_RATE (
  *  Table containing the types of "material" in which denominations are issued         *
  ***************************************************************************************/
 
-CREATE TABLE DENOMINATION_TYPE (
+CREATE TABLE IF NOT EXISTS DENOMINATION_TYPE (
   DENOMINATION_TYPE_CODE VARCHAR(1)   NOT NULL PRIMARY KEY,
-  DESCRIPTION            VARCHAR(255) NOT NULL,
+  DESCRIPTION            VARCHAR(255) NOT NULL
 );
 
 /***************************************************************************************
@@ -75,8 +75,8 @@ CREATE TABLE DENOMINATION_TYPE (
  *  "Note"*                                                                            *
  ***************************************************************************************/
 
-CREATE TABLE DENOMINATION (
-  DENOMINATION_ID        INTEGER NOT NULL IDENTITY PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS DENOMINATION (
+  DENOMINATION_ID        INTEGER NOT NULL PRIMARY KEY,
   VALUE                  DECIMAL NOT NULL,
   DENOMINATION_TYPE_CODE VARCHAR(1) REFERENCES DENOMINATION_TYPE (DENOMINATION_TYPE_CODE)
 );
@@ -85,8 +85,8 @@ CREATE TABLE DENOMINATION (
  *  CLIENT DATA                                                                      *
  ***************************************************************************************/
 
-CREATE TABLE CLIENT (
-  CLIENT_ID            INTEGER IDENTITY PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS CLIENT (
+  CLIENT_ID            INTEGER PRIMARY KEY,
   TITLE                VARCHAR(10),
   NAME                 VARCHAR(255) NOT NULL,
   SURNAME              VARCHAR(100),
@@ -105,8 +105,8 @@ CREATE TABLE CLIENT (
  *  PLOAN and HLOAN list outstanding balances on the loan amounts as negative amounts  *
  ***************************************************************************************/
 
-CREATE TABLE CLIENT_ACCOUNT (
-  CLIENT_ACCOUNT_NUMBER VARCHAR(10) IDENTITY PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS CLIENT_ACCOUNT (
+  CLIENT_ACCOUNT_NUMBER VARCHAR(10) PRIMARY KEY,
   CLIENT_ID             INTEGER     NOT NULL REFERENCES CLIENT (CLIENT_ID),
   ACCOUNT_TYPE_CODE     VARCHAR(10) NOT NULL REFERENCES ACCOUNT_TYPE (ACCOUNT_TYPE_CODE),
   CURRENCY_CODE         VARCHAR(3)  NOT NULL REFERENCES CURRENCY (CURRENCY_CODE),
@@ -121,7 +121,7 @@ CREATE TABLE CLIENT_ACCOUNT (
  ***************************************************************************************
  */
 
-CREATE TABLE CREDIT_CARD_LIMIT (
+CREATE TABLE IF NOT EXISTS CREDIT_CARD_LIMIT (
   CLIENT_ACCOUNT_NUMBER VARCHAR(10)    NOT NULL PRIMARY KEY REFERENCES CLIENT_ACCOUNT (CLIENT_ACCOUNT_NUMBER),
   ACCOUNT_LIMIT         DECIMAL(18, 3) NOT NULL
 );
@@ -131,8 +131,8 @@ CREATE TABLE CREDIT_CARD_LIMIT (
  *  Lists the ID and location of each ATM                                              *
  ***************************************************************************************/
 
-CREATE TABLE ATM (
-  ATM_ID   INTEGER IDENTITY PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS ATM (
+  ATM_ID   INTEGER PRIMARY KEY,
   NAME     VARCHAR(10)  NOT NULL UNIQUE,
   LOCATION VARCHAR(255) NOT NULL
 );
@@ -143,8 +143,8 @@ CREATE TABLE ATM (
  *  Stores the number of notes per denomination available to each ATM                  *
  ***************************************************************************************/
 
-CREATE TABLE ATM_ALLOCATION (
-  ATM_ALLOCATION_ID INTEGER IDENTITY PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS ATM_ALLOCATION (
+  ATM_ALLOCATION_ID INTEGER PRIMARY KEY,
   ATM_ID            INTEGER NOT NULL REFERENCES ATM (ATM_ID),
   DENOMINATION_ID   INTEGER NOT NULL REFERENCES DENOMINATION (DENOMINATION_ID),
   COUNT             INTEGER NOT NULL

@@ -7,7 +7,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 /**
  * @author Arthur Gwatidzo email:arthur.gwatidzo@gmail.com
  */
-@SpringBootApplication
+// @SpringBootApplication
 public class ServletInitializer extends SpringBootServletInitializer {
 
 	@Override

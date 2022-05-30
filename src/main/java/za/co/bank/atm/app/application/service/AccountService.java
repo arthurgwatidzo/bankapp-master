@@ -1,5 +1,6 @@
 package za.co.bank.atm.app.application.service;
 
+import lombok.extern.slf4j.Slf4j;
 import za.co.bank.atm.app.domain.*;
 import za.co.bank.atm.app.domain.dto.*;
 import za.co.bank.atm.app.exception.ApplicationException;
@@ -20,6 +21,7 @@ import static za.co.bank.atm.app.domain.dto.CurrencyAccountDto.*;
 /**
  * @author Arthur Gwatidzo email:arthur.gwatidzo@gmail.com
  */
+@Slf4j
 @Service
 public class AccountService {
 
@@ -68,10 +70,10 @@ public class AccountService {
         List<AtmDenominationResponseDto> atmDenominationResponseDtoList;
         BigDecimal amountAfterWithdrawal;
 
-        ClientAccount clientAccountDetails =  clientAccountRepository. findByClientAccountNumber(accountWithdrawalRequestDto.getAccountNumber());
+        ClientAccount clientAccountDetails =  clientAccountRepository.findByClientAccountNumber(accountWithdrawalRequestDto.getAccountNumber());
+        log.debug("ClientAccountDetails= {}", clientAccountDetails);
 
         if(clientAccountDetails.getAccount_type_code().getAccount_type_code().equals(AccountTypeEnum.CHQ.toString())){
-
             int i = clientAccountDetails.getDisplayBalance().subtract(accountWithdrawalRequestDto.getWithdrawalAmt()).intValue();
             if(clientAccountDetails.getDisplayBalance().compareTo(new BigDecimal(-10000)) == -1||i < -10000){
                 throw new ApplicationException("Insufficient funds: You have exceeded your cheque account limit");

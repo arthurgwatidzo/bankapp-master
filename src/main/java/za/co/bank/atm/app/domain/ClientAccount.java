@@ -1,10 +1,8 @@
 package za.co.bank.atm.app.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.lang.NonNull;
@@ -19,6 +17,7 @@ import java.math.BigDecimal;
 @Table(name = "client_account")
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 public class ClientAccount implements Serializable {
 
